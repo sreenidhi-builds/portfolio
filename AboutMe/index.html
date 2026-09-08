@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+(function(){try{if(sessionStorage.getItem('pt-pending')){document.documentElement.className+=' pt-incoming';var s=document.createElement('style');s.textContent='html.pt-incoming{background:#050505;}html.pt-incoming body{transform:translateY(100%);}';document.head.appendChild(s);}}catch(e){}})();
+</script>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>About Sreenidhi</title>
@@ -620,7 +624,7 @@
 <header class="nav">
   <div class="nav-inner">
     <div class="logo-wrap">
-      <a href="../index.html" class="logo" aria-label="Sreenidhi J — home">
+      <a href="../index.html" class="logo" aria-label="Sreenidhi J — home" data-transition="home">
         <svg class="logo-mark" width="52" height="46" viewBox="0 0 52 46" fill="none" xmlns="http://www.w3.org/2000/svg">
           <ellipse cx="24" cy="22" rx="23" ry="9" transform="rotate(-12 24 22)" stroke="#f3ede1" stroke-width="1.4" fill="none"/>
           <circle cx="22" cy="24" r="12" fill="#f3ede1"/>
@@ -981,5 +985,6 @@
   }, { passive:true });
 })();
 </script>
+<script src="../LoadingScreens/transition.js"></script>
 </body>
 </html>

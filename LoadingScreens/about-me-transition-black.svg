@@ -7,7 +7,7 @@
     <text x="800" y="535" font-size="15" letter-spacing="5">CONNECTING THE STORY...</text>
   </g>
   <g id="illustration" transform="translate(0 2)" fill="none" stroke="#F4F1E8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <g id="spool">
+    <g id="spool" style="transform-box:fill-box;transform-origin:center;">
       <ellipse cx="722" cy="410" rx="22" ry="6"/>
       <ellipse cx="722" cy="468" rx="22" ry="6"/>
       <path d="M704 413v52M740 413v52M708 419h28M707 426h30M707 433h30M707 440h30M707 447h30M707 454h30M708 461h28"/>

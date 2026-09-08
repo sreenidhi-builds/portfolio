@@ -7,10 +7,12 @@
     <text x="800" y="535" font-size="15" letter-spacing="5">OPENING THE CASE STUDY...</text>
   </g>
   <g id="illustration" fill="none" stroke="#F4F1E8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <g id="magnifier" transform="rotate(-43 714 444)">
-      <circle cx="714" cy="426" r="17"/>
-      <circle cx="714" cy="426" r="12" opacity=".55"/>
-      <path d="M714 443v30"/>
+    <g id="magnifier" style="transform-box:fill-box;transform-origin:center;">
+      <g transform="rotate(-43 714 444)">
+        <circle cx="714" cy="426" r="17"/>
+        <circle cx="714" cy="426" r="12" opacity=".55"/>
+        <path d="M714 443v30"/>
+      </g>
     </g>
     <path id="gold-thread" d="M742 449C781 429 815 437 838 454C854 466 850 480 838 480C823 480 823 461 842 453C866 443 886 442 908 423" stroke="#D8AA3A" stroke-width="2.25"/>
     <g id="spark" transform="translate(920 414)" fill="#D8AA3A" stroke="none">
