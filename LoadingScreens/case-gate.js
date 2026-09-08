@@ -14,7 +14,7 @@
   if ('scrollRestoration' in history) {
     try { history.scrollRestoration = 'manual'; } catch (e) {}
   }
-  window.scrollTo(0, 0);
+  window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
 
   var docEl = document.documentElement;
   docEl.classList.add('cg-locked');
@@ -48,7 +48,7 @@
     docEl.classList.remove('cg-locked');
     var overlay = document.getElementById('cg-overlay');
     if (overlay) overlay.remove();
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   }
 
   function init() {
