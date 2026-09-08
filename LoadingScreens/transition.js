@@ -6,9 +6,7 @@
   // local files is blocked by the browser's CORS policy and would otherwise fail silently,
   // leaving just the black overlay with no artwork.
   var SVG_MARKUP = {
-    'home': '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">'
-      + '<title id="title">Home transition</title>'
-      + '<desc id="desc">An open doorway crossed by a golden thread on black with the message Back to the beginning.</desc>'
+    'home': '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-hidden="true">'
       + '<rect width="1600" height="900" fill="#050505"/>'
       + '<g id="message" fill="#F4F1E8" text-anchor="middle" font-family="\'Courier New\', monospace" letter-spacing="6">'
       + '<text x="800" y="340" font-size="20">BACK TO THE BEGINNING.</text>'
@@ -29,9 +27,7 @@
       + '</g>'
       + '</g>'
       + '</svg>',
-    'case-study': '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">'
-      + '<title id="title">Case study transition</title>'
-      + '<desc id="desc">A magnifying glass following a path toward a golden spark on black.</desc>'
+    'case-study': '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-hidden="true">'
       + '<rect width="1600" height="900" fill="#050505"/>'
       + '<g id="message" fill="#F4F1E8" text-anchor="middle" font-family="\'Courier New\', monospace" letter-spacing="6">'
       + '<text x="800" y="365" font-size="20">LET’S LOOK CLOSER.</text>'
@@ -51,9 +47,7 @@
       + '</g>'
       + '</g>'
       + '</svg>',
-    'about-me': '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">'
-      + '<title id="title">About Me transition</title>'
-      + '<desc id="desc">A spool and golden thread on black with the message Let\'s follow the thread.</desc>'
+    'about-me': '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-hidden="true">'
       + '<rect width="1600" height="900" fill="#050505"/>'
       + '<g id="message" fill="#F4F1E8" text-anchor="middle" font-family="\'Courier New\', monospace" letter-spacing="6">'
       + '<text x="800" y="365" font-size="20">LET’S FOLLOW THE THREAD.</text>'
@@ -98,8 +92,12 @@
   }
 
   // Each type has its own icon animation (door opens / magnifier twists / spool rotates)
-  // that plays first, then the thread draws toward the spark. All share the same 400ms lead-in.
-  var LEAD_IN = { 'about-me': 400, 'case-study': 400, 'home': 400 };
+  // that plays first, then the thread draws toward the spark. All share the same 250ms lead-in.
+  // Tuned so the whole outgoing+incoming sequence lands around 2s total.
+  var LEAD_IN = { 'about-me': 250, 'case-study': 250, 'home': 250 };
+  var SPARK_OFFSET = 300; // spark starts this long after the icon animation ends
+  var SPARK_DURATION = 450;
+  var HOLD_AFTER_SPARK = 300;
 
   function primeThread(svgEl, type) {
     var lead = LEAD_IN[type] || 0;
@@ -112,7 +110,7 @@
       thread.style.setProperty('--pt-thread-delay', lead + 'ms');
     }
     var spark = svgEl.querySelector('#spark');
-    if (spark) spark.style.setProperty('--pt-spark-delay', (lead + 550) + 'ms');
+    if (spark) spark.style.setProperty('--pt-spark-delay', (lead + SPARK_OFFSET) + 'ms');
   }
 
   function setArt(type) {
@@ -135,9 +133,9 @@
     overlay.classList.add('pt-draw'); // door/magnifier/spool -> thread draws -> spark glows
     sessionStorage.setItem(STORAGE_KEY, '1');
     var lead = LEAD_IN[type] || 0;
-    // icon animation (400ms) -> thread draws (700ms, overlapping) -> spark glows (700ms) -> hold.
-    // Tuned so outgoing + the 700ms incoming slide-up land around 3.5-4s total.
-    var totalHold = lead + 550 + 700 + 1400;
+    // icon animation -> thread draws (overlapping) -> spark glows -> brief hold -> navigate.
+    // Plus the ~500ms incoming slide-up on the destination page, the whole thing is ~2s.
+    var totalHold = lead + SPARK_OFFSET + SPARK_DURATION + HOLD_AFTER_SPARK;
     setTimeout(function () {
       window.location.href = targetUrl;
     }, totalHold);

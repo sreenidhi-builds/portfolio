@@ -1,6 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
-  <title id="title">Case study transition</title>
-  <desc id="desc">A magnifying glass following a path toward a golden spark on black.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-hidden="true">
   <rect width="1600" height="900" fill="#050505"/>
   <g id="message" fill="#F4F1E8" text-anchor="middle" font-family="'Courier New', monospace" letter-spacing="6">
     <text x="800" y="365" font-size="20">LET’S LOOK CLOSER.</text>

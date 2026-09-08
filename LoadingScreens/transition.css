@@ -7,11 +7,11 @@
 .pt-art #magnifier{transform:rotate(0deg);}
 .pt-art #spool{transform:rotate(0deg);}
 
-#pt-overlay.pt-draw .pt-art #door-leaf{animation:pt-door-open 400ms ease-out forwards;}
-#pt-overlay.pt-draw .pt-art #magnifier{animation:pt-magnifier-twist 400ms ease-out forwards;}
-#pt-overlay.pt-draw .pt-art #spool{animation:pt-spool-rotate 400ms ease-out forwards;}
-#pt-overlay.pt-draw .pt-art #gold-thread{animation:pt-thread-draw 700ms ease-out var(--pt-thread-delay,400ms) forwards;}
-#pt-overlay.pt-draw .pt-art #spark{animation:pt-spark-glow 700ms ease-out var(--pt-spark-delay,950ms) forwards;}
+#pt-overlay.pt-draw .pt-art #door-leaf{animation:pt-door-open 250ms ease-out forwards;}
+#pt-overlay.pt-draw .pt-art #magnifier{animation:pt-magnifier-twist 250ms ease-out forwards;}
+#pt-overlay.pt-draw .pt-art #spool{animation:pt-spool-rotate 250ms ease-out forwards;}
+#pt-overlay.pt-draw .pt-art #gold-thread{animation:pt-thread-draw 450ms ease-out var(--pt-thread-delay,250ms) forwards;}
+#pt-overlay.pt-draw .pt-art #spark{animation:pt-spark-glow 450ms ease-out var(--pt-spark-delay,550ms) forwards;}
 
 @keyframes pt-door-open{
   to{ transform:scaleX(1); }
@@ -39,7 +39,7 @@
 
 html.pt-incoming{ background:#050505; }
 html.pt-incoming body{ transform:translateY(100%); }
-html.pt-incoming.pt-sliding body{ transition:transform 700ms ease-out; transform:translateY(0); }
+html.pt-incoming.pt-sliding body{ transition:transform 500ms ease-out; transform:translateY(0); }
 
 @media (prefers-reduced-motion: reduce){
   .pt-art #gold-thread, .pt-art #spark, .pt-art #door-leaf, .pt-art #magnifier, .pt-art #spool{
