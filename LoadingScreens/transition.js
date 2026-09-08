@@ -93,11 +93,11 @@
 
   // Each type has its own icon animation (door opens / magnifier twists / spool rotates)
   // that plays first, then the thread draws toward the spark. All share the same 250ms lead-in.
-  // Tuned so the whole outgoing+incoming sequence lands around 2s total.
-  var LEAD_IN = { 'about-me': 250, 'case-study': 250, 'home': 250 };
-  var SPARK_OFFSET = 300; // spark starts this long after the icon animation ends
-  var SPARK_DURATION = 450;
-  var HOLD_AFTER_SPARK = 300;
+  // Tuned so the whole outgoing+incoming sequence lands around 2.8s total.
+  var LEAD_IN = { 'about-me': 400, 'case-study': 400, 'home': 400 };
+  var SPARK_OFFSET = 450; // spark starts this long after the icon animation ends
+  var SPARK_DURATION = 650;
+  var HOLD_AFTER_SPARK = 650;
 
   function primeThread(svgEl, type) {
     var lead = LEAD_IN[type] || 0;
@@ -134,7 +134,7 @@
     sessionStorage.setItem(STORAGE_KEY, '1');
     var lead = LEAD_IN[type] || 0;
     // icon animation -> thread draws (overlapping) -> spark glows -> brief hold -> navigate.
-    // Plus the ~500ms incoming slide-up on the destination page, the whole thing is ~2s.
+    // Plus the ~650ms incoming slide-up on the destination page, the whole thing is ~2.8s.
     var totalHold = lead + SPARK_OFFSET + SPARK_DURATION + HOLD_AFTER_SPARK;
     setTimeout(function () {
       window.location.href = targetUrl;
