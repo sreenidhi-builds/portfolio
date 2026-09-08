@@ -1,0 +1,58 @@
+html.cg-locked body{ overflow:hidden; }
+
+#cg-overlay{
+  position:fixed; inset:0; z-index:999998;
+  background:#050505;
+  display:flex; align-items:center; justify-content:center;
+  padding:24px;
+}
+
+.cg-box{
+  width:100%; max-width:360px;
+  display:flex; flex-direction:column; align-items:center; gap:16px;
+  text-align:center;
+  font-family:'Manrope', system-ui, -apple-system, sans-serif;
+}
+
+.cg-label{
+  color:#f4f1e8;
+  font-size:1rem;
+  line-height:1.4;
+  margin:0;
+}
+
+#cg-form{
+  display:flex; width:100%; gap:8px;
+}
+
+#cg-input{
+  flex:1;
+  padding:12px 16px;
+  border-radius:999px;
+  border:1px solid #3a3a3a;
+  background:#141414;
+  color:#f4f1e8;
+  font-size:1rem;
+  outline:none;
+  transition:border-color .2s ease;
+}
+#cg-input:focus{ border-color:#d8aa3a; }
+
+#cg-form button{
+  padding:12px 22px;
+  border-radius:999px;
+  border:none;
+  background:#d8aa3a;
+  color:#1a1305;
+  font-weight:700;
+  font-size:1rem;
+  cursor:pointer;
+  transition:transform .2s ease, background .2s ease;
+}
+#cg-form button:hover{ transform:translateY(-2px); background:#f0c14e; }
+
+.cg-error{
+  color:#e4572e;
+  font-size:.9rem;
+  margin:0;
+}

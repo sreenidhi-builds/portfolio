@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /bd4/ContactAdd/
+Disallow: /bd4/Onboarding/
+Disallow: /Conversight/DemandForecast/
