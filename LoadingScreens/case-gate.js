@@ -9,6 +9,13 @@
     if (sessionStorage.getItem(STORAGE_KEY) === '1') return; // already unlocked this session
   } catch (e) {}
 
+  // Stop the browser from restoring a previous scroll position (e.g. back/forward nav)
+  // while the gate is up, and make sure we start pinned to the top underneath it.
+  if ('scrollRestoration' in history) {
+    try { history.scrollRestoration = 'manual'; } catch (e) {}
+  }
+  window.scrollTo(0, 0);
+
   var docEl = document.documentElement;
   docEl.classList.add('cg-locked');
 
@@ -41,6 +48,7 @@
     docEl.classList.remove('cg-locked');
     var overlay = document.getElementById('cg-overlay');
     if (overlay) overlay.remove();
+    window.scrollTo(0, 0);
   }
 
   function init() {
