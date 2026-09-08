@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+(function(){try{if(sessionStorage.getItem('pt-pending')){document.documentElement.className+=' pt-incoming';var s=document.createElement('style');s.textContent='html.pt-incoming{background:#050505;}html.pt-incoming body{transform:translateY(100%);}';document.head.appendChild(s);}}catch(e){}
+})();
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ConverSight - Case Study</title>
@@ -1867,7 +1871,7 @@
 <body>
 <header class="nav">
   <div class="nav-inner">
-    <a href="../../index.html#top" class="logo" aria-label="Sreenidhi J — home">
+    <a href="../../index.html#top" class="logo" aria-label="Sreenidhi J — home" data-transition="home">
       <svg class="logo-mark" width="52" height="46" viewBox="0 0 52 46" fill="none" xmlns="http://www.w3.org/2000/svg">
         <ellipse cx="24" cy="22" rx="23" ry="9" transform="rotate(-12 24 22)" stroke="#f5f5f5" stroke-width="1.4" fill="none"/>
         <circle cx="22" cy="24" r="12" fill="#f5f5f5"/>
@@ -1878,8 +1882,8 @@
       <span class="logo-text">SJ</span>
     </a>
     <nav class="nav-links" aria-label="Primary">
-      <a href="../../index.html#works">Projects</a>
-      <a href="../../AboutMe/index.html">About me</a>
+      <a href="../../index.html#works" data-transition="home">Projects</a>
+      <a href="../../AboutMe/index.html" data-transition="about-me">About me</a>
       <a href="../../Sreenidhi_Resume_Product_Strategist_Designer.pdf" target="_blank" rel="noopener">Resume</a>
     </nav>
     <a class="linkedin-pill" href="https://www.linkedin.com/in/sreenidhi-jai/" target="_blank" rel="noopener" aria-label="LinkedIn profile">
@@ -3066,5 +3070,6 @@
 </footer>
 <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 
+<script src="../../LoadingScreens/transition.js"></script>
 </body>
 </html>

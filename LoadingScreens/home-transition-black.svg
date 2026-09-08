@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Home transition</title>
+  <desc id="desc">An open doorway crossed by a golden thread on black with the message Back to the beginning.</desc>
+  <rect width="1600" height="900" fill="#050505"/>
+  <g id="message" fill="#F4F1E8" text-anchor="middle" font-family="'Courier New', monospace" letter-spacing="6">
+    <text x="800" y="340" font-size="20">BACK TO THE BEGINNING.</text>
+    <text x="800" y="560" font-size="15" letter-spacing="5">RETURNING HOME...</text>
+  </g>
+  <g id="illustration" fill="none" stroke="#F4F1E8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <g id="doorway">
+      <path d="M752 505V380H824V505M752 380H824"/>
+      <g id="door-leaf" style="transform-box:fill-box;transform-origin:0% 50%;">
+        <path d="M824 380L846 392V493L824 505V380Z"/>
+        <circle cx="838" cy="445" r="2.5" fill="#F4F1E8" stroke="none"/>
+      </g>
+      <path d="M728 505H870" opacity=".55"/>
+    </g>
+    <path id="gold-thread" d="M734 445C758 437 765 468 797 466C826 464 840 439 868 437" stroke="#D8AA3A" stroke-width="2.25"/>
+    <g id="spark" transform="translate(879 433)" fill="#D8AA3A" stroke="none">
+      <path d="M0-12C2-4 4-2 12 0C4 2 2 4 0 12C-2 4-4 2-12 0C-4-2-2-4 0-12Z"/>
+    </g>
+  </g>
+</svg>
