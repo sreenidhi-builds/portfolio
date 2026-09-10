@@ -194,23 +194,35 @@
   // Entry flow: pages that want the full outgoing-style animation (icon -> thread -> spark)
   // to play on every load — not just after a data-transition click — mark
   // <html data-entry-transition="home"> (or case-study/about-me). The <head> pre-paint
-  // snippet on that page must hide the body itself (this script doesn't do that part,
-  // since it runs at end-of-body, after first paint).
+  // snippet on that page must hide the body itself AND (since this script sits at the end of
+  // a multi-MB body and may load long after first paint) start the animation itself, recording
+  // window.__ptEarlyStart. Here we adopt that already-playing overlay (window.__ptEarlyOverlay)
+  // instead of restarting the animation from zero, and only wait out whatever time is left.
   function playEntryTransitionIfRequested() {
     var root = document.documentElement;
     var type = root.getAttribute('data-entry-transition');
     if (!type || !SVG_MARKUP[type]) return;
 
     ensureCss();
-    if (!overlay) buildOverlay();
-
-    setArt(type);
-    overlay.classList.add('pt-active');
-    void overlay.offsetWidth; // force reflow
-    overlay.classList.add('pt-draw');
 
     var lead = LEAD_IN[type] || 0;
     var totalHold = lead + SPARK_OFFSET + SPARK_DURATION + HOLD_AFTER_SPARK;
+    var remaining = totalHold;
+
+    if (window.__ptEarlyOverlay) {
+      overlay = window.__ptEarlyOverlay;
+      artHost = overlay.querySelector('.pt-art');
+      var elapsed = Date.now() - (window.__ptEarlyStart || Date.now());
+      remaining = Math.max(0, totalHold - elapsed);
+    } else {
+      if (!overlay) buildOverlay();
+      setArt(type);
+      overlay.classList.add('pt-active');
+      void overlay.offsetWidth; // force reflow
+      overlay.classList.add('pt-draw');
+    }
+
+    var isEarlyOverlay = overlay === window.__ptEarlyOverlay;
 
     setTimeout(function () {
       // Reveal the page (slide up from bottom) while the overlay fades away.
@@ -221,7 +233,11 @@
           root.classList.add('pt-sliding');
         });
       });
-      overlay.classList.remove('pt-active', 'pt-draw');
+      if (isEarlyOverlay) {
+        if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+      } else {
+        overlay.classList.remove('pt-active', 'pt-draw');
+      }
 
       var fallback;
       var cleanup = function () {
@@ -234,7 +250,7 @@
       };
       document.body.addEventListener('transitionend', onEnd);
       fallback = setTimeout(cleanup, 900);
-    }, totalHold);
+    }, remaining);
   }
 
   ensureCss();
