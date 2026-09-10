@@ -191,10 +191,66 @@
     playTransition(type, link.href);
   });
 
+  // Entry flow: pages that want the full outgoing-style animation (icon -> thread -> spark)
+  // to play on every load — not just after a data-transition click — mark
+  // <html data-entry-transition="home"> (or case-study/about-me). The <head> pre-paint
+  // snippet on that page must hide the body itself (this script doesn't do that part,
+  // since it runs at end-of-body, after first paint).
+  function playEntryTransitionIfRequested() {
+    var root = document.documentElement;
+    var type = root.getAttribute('data-entry-transition');
+    if (!type || !SVG_MARKUP[type]) return;
+
+    ensureCss();
+    if (!overlay) buildOverlay();
+
+    setArt(type);
+    overlay.classList.add('pt-active');
+    void overlay.offsetWidth; // force reflow
+    overlay.classList.add('pt-draw');
+
+    var lead = LEAD_IN[type] || 0;
+    var totalHold = lead + SPARK_OFFSET + SPARK_DURATION + HOLD_AFTER_SPARK;
+
+    setTimeout(function () {
+      // Reveal the page (slide up from bottom) while the overlay fades away.
+      root.classList.add('pt-incoming');
+      void root.offsetWidth;
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          root.classList.add('pt-sliding');
+        });
+      });
+      overlay.classList.remove('pt-active', 'pt-draw');
+
+      var fallback;
+      var cleanup = function () {
+        clearTimeout(fallback);
+        root.classList.remove('pt-incoming', 'pt-sliding');
+        document.body.removeEventListener('transitionend', onEnd);
+      };
+      var onEnd = function (e) {
+        if (e.target === document.body && e.propertyName === 'transform') cleanup();
+      };
+      document.body.addEventListener('transitionend', onEnd);
+      fallback = setTimeout(cleanup, 900);
+    }, totalHold);
+  }
+
   ensureCss();
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', playIntroIfPending);
+    document.addEventListener('DOMContentLoaded', function () {
+      if (document.documentElement.hasAttribute('data-entry-transition')) {
+        playEntryTransitionIfRequested();
+      } else {
+        playIntroIfPending();
+      }
+    });
   } else {
-    playIntroIfPending();
+    if (document.documentElement.hasAttribute('data-entry-transition')) {
+      playEntryTransitionIfRequested();
+    } else {
+      playIntroIfPending();
+    }
   }
 })();

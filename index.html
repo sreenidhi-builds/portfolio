@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-entry-transition="home">
 <head>
 <script>
-(function(){try{if(sessionStorage.getItem('pt-pending')){document.documentElement.className+=' pt-incoming';var s=document.createElement('style');s.textContent='html.pt-incoming{background:#050505;}html.pt-incoming body{transform:translateY(100%);}';document.head.appendChild(s);}}catch(e){}})();
+(function(){try{document.documentElement.className+=' pt-incoming';var s=document.createElement('style');s.textContent='html.pt-incoming{background:#050505;}html.pt-incoming body{transform:translateY(100%);}';document.head.appendChild(s);sessionStorage.removeItem('pt-pending');}catch(e){}})();
 </script>
 
 <meta charset="UTF-8" />
