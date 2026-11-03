@@ -74,6 +74,36 @@
 
   var overlay, artHost;
 
+  // Light/dark palette for the overlay. The overlay follows the theme of the page being left:
+  // an explicit <html data-theme="light|dark"> wins (About page toggle), otherwise it is
+  // inferred from the page's own background luminance.
+  var LIGHT_SWAP = { '#050505': '#F7F3EC', '#F4F1E8': '#1B1D24', '#D8AA3A': '#B8750A' };
+
+  function currentTheme() {
+    var root = document.documentElement;
+    var explicit = root.getAttribute('data-theme');
+    if (explicit === 'light' || explicit === 'dark') return explicit;
+    var els = [document.body, root];
+    for (var i = 0; i < els.length; i++) {
+      var m = getComputedStyle(els[i]).backgroundColor.match(/rgba?\(([^)]+)\)/);
+      if (!m) continue;
+      var p = m[1].split(',').map(parseFloat);
+      if (p.length > 3 && p[3] === 0) continue; // transparent, look at the next layer
+      return (0.2126 * p[0] + 0.7152 * p[1] + 0.0722 * p[2]) > 140 ? 'light' : 'dark';
+    }
+    return 'dark';
+  }
+
+  function themedMarkup(markup, theme) {
+    if (theme !== 'light') return markup;
+    return markup.replace(/#050505|#F4F1E8|#D8AA3A/g, function (c) { return LIGHT_SWAP[c]; });
+  }
+
+  function applyTheme(theme) {
+    overlay.classList.toggle('pt-light', theme === 'light');
+  }
+
+
   function buildOverlay() {
     overlay = document.createElement('div');
     overlay.id = 'pt-overlay';
@@ -113,8 +143,9 @@
     if (spark) spark.style.setProperty('--pt-spark-delay', (lead + SPARK_OFFSET) + 'ms');
   }
 
-  function setArt(type) {
-    artHost.innerHTML = SVG_MARKUP[type] || '';
+  function setArt(type, theme) {
+    applyTheme(theme);
+    artHost.innerHTML = themedMarkup(SVG_MARKUP[type] || '', theme);
     primeThread(artHost.querySelector('svg'), type);
   }
 
@@ -125,13 +156,15 @@
     if (!overlay) buildOverlay();
 
     overlay.classList.remove('pt-draw');
-    setArt(type);
+    var theme = currentTheme();
+    setArt(type, theme);
 
     overlay.classList.add('pt-active');
     void overlay.offsetWidth; // force reflow
 
     overlay.classList.add('pt-draw'); // door/magnifier/spool -> thread draws -> spark glows
     sessionStorage.setItem(STORAGE_KEY, '1');
+    sessionStorage.setItem('pt-theme', theme);
     var lead = LEAD_IN[type] || 0;
     // icon animation -> thread draws (overlapping) -> spark glows -> brief hold -> navigate.
     // Plus the ~650ms incoming slide-up on the destination page, the whole thing is ~2.8s.
@@ -145,6 +178,7 @@
   // before first paint. Here we just kick off the slide-up now that CSS/DOM are ready.
   function playIntroIfPending() {
     sessionStorage.removeItem(STORAGE_KEY);
+    sessionStorage.removeItem('pt-theme');
     var root = document.documentElement;
     if (!root.classList.contains('pt-incoming')) return;
 
@@ -204,7 +238,7 @@
     ensureCss();
     if (!overlay) buildOverlay();
 
-    setArt(type);
+    setArt(type, 'dark');
     overlay.classList.add('pt-active');
     void overlay.offsetWidth; // force reflow
     overlay.classList.add('pt-draw');
