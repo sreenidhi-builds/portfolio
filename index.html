@@ -1086,6 +1086,17 @@ html[data-theme="dark"] .drag-cursor path{ fill:#f4f4f4; stroke:#0d0d0d; }
 html[data-theme="dark"] .fab-theme .i-sun{ display:block; } html[data-theme="dark"] .fab-theme .i-moon{ display:none; }
 @media (prefers-reduced-motion: reduce){ .fab{ transition:none; } }
 
+/* ===== About me button (replaces the hover-only link on the logo) ===== */
+html[data-theme="dark"] .about-btn{position:relative; width:60px; height:50px; border-radius:10px; border:1px solid transparent; box-sizing:border-box; display:flex; align-items:center; justify-content:center; color:#c9c9cd; background:transparent; transition:transform .2s ease, color .2s ease, border-color .2s ease;; width:auto; padding:0 22px; gap:8px; font-family:var(--font-body); font-weight:600; font-size:15px; white-space:nowrap; text-decoration:none; color:var(--text-hi);}
+html[data-theme="dark"] .about-btn:hover{color:var(--gold-soft); border-color:var(--gold-soft); transform:translateY(-2px);}
+html[data-theme="dark"] .about-btn.is-current{color:var(--gold); border-color:var(--gold);}
+html[data-theme="dark"] .about-btn:hover .btn-corner, html[data-theme="dark"] .about-btn.is-current .btn-corner{opacity:1;}
+@media (max-width: 620px){html[data-theme="dark"] .about-btn{display:none;}}
+html[data-theme="light"] .about-btn{position:relative; width:60px; height:50px; border-radius:10px; border:1.5px solid var(--card-border); box-sizing:border-box; display:flex; align-items:center; justify-content:center; color:#55585f; background:#fff; box-shadow:0 1px 3px rgba(30,40,70,.07); transition:transform .2s ease, color .2s ease, border-color .2s ease, background .3s ease;; width:auto; padding:0 22px; gap:8px; font-family:var(--font-body); font-weight:600; font-size:15px; white-space:nowrap; text-decoration:none; color:var(--text-hi);}
+html[data-theme="light"] .about-btn:hover{color:var(--gold); border-color:var(--gold); background:#fff; transform:translateY(-2px);}
+html[data-theme="light"] .about-btn.is-current{color:var(--gold); border-color:var(--gold);}
+html[data-theme="light"] .about-btn:hover .btn-corner, html[data-theme="light"] .about-btn.is-current .btn-corner{opacity:1;}
+@media (max-width: 620px){html[data-theme="light"] .about-btn{display:none;}}
 </style>
 </head>
 <body id="top">
@@ -1139,9 +1150,9 @@ html[data-theme="dark"] .fab-theme .i-sun{ display:block; } html[data-theme="dar
         </svg>
         <span class="logo-text">Sree</span>
       </a>
-      <a href="AboutMe/" class="logo-about" data-transition="about-me">About me</a>
     </div>
     <div class="nav-right">
+      <a class="about-btn" href="AboutMe/" data-transition="about-me" aria-label="About me"><span class="btn-corner tl"></span><span class="btn-corner tr"></span><span class="btn-corner bl"></span><span class="btn-corner br"></span><span>About me</span></a>
       <a class="nav-resume" href="Sreenidhi_Resume_Product_Strategist_Designer.pdf" target="_blank" rel="noopener" aria-label="Resume">
         <span class="btn-corner tl"></span>
         <span class="btn-corner tr"></span>
