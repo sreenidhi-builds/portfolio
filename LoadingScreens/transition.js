@@ -238,7 +238,7 @@
     ensureCss();
     if (!overlay) buildOverlay();
 
-    setArt(type, 'dark');
+    setArt(type, currentTheme());
     overlay.classList.add('pt-active');
     void overlay.offsetWidth; // force reflow
     overlay.classList.add('pt-draw');

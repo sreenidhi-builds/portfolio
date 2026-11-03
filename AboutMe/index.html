@@ -2,7 +2,7 @@
 <html lang="en" data-theme="light">
 <head>
 <script>
-(function(){try{var t=localStorage.getItem('about-theme');document.documentElement.dataset.theme=(t==='dark')?'dark':'light';}catch(e){document.documentElement.dataset.theme='light';}})();
+(function(){try{var t=localStorage.getItem('site-theme');document.documentElement.dataset.theme=(t==='dark')?'dark':'light';}catch(e){document.documentElement.dataset.theme='light';}})();
 (function(){try{if(sessionStorage.getItem('pt-pending')){document.documentElement.className+=' pt-incoming';var s=document.createElement('style');s.textContent='html.pt-incoming{background:'+(sessionStorage.getItem('pt-theme')==='light'?'#F7F3EC':'#050505')+';}html.pt-incoming body{transform:translateY(100%);}';document.head.appendChild(s);}}catch(e){}})();
 </script>
 <meta charset="UTF-8">
@@ -1248,7 +1248,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
   btn.addEventListener('click', function(){
     var next = root.dataset.theme === 'dark' ? 'light' : 'dark';
     root.dataset.theme = next; sync();
-    try{ localStorage.setItem('about-theme', next); }catch(e){}
+    try{ localStorage.setItem('site-theme', next); }catch(e){}
   });
   top.addEventListener('click', function(){ window.scrollTo({ top:0, behavior:'smooth' }); });
   function vis(){ top.classList.toggle('show', window.scrollY > 600); }
