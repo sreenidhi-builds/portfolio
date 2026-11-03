@@ -2,6 +2,19 @@
 <html lang="en" data-theme="light">
 <head>
 <script>
+/* always open at the top: stop the browser restoring an old scroll position (skipped when the URL has a #anchor) */
+(function(){
+  try{ if('scrollRestoration' in history) history.scrollRestoration = 'manual'; }catch(e){}
+  var touched = false;
+  function mark(){ touched = true; }
+  ['wheel','touchstart','keydown','mousedown'].forEach(function(ev){ window.addEventListener(ev, mark, { passive:true, once:true }); });
+  function top(){ if(!location.hash) window.scrollTo({ top:0, left:0, behavior:'instant' }); }
+  top();
+  document.addEventListener('DOMContentLoaded', top);
+  window.addEventListener('load', function(){ if(!touched) top(); });
+})();
+</script>
+<script>
 (function(){try{if(sessionStorage.getItem('pt-pending')){document.documentElement.className+=' pt-incoming';var s=document.createElement('style');s.textContent='html.pt-incoming{background:'+(sessionStorage.getItem('pt-theme')==='light'?'#F7F3EC':'#050505')+';}html.pt-incoming body{transform:translateY(100%);}';document.head.appendChild(s);}}catch(e){}
 })();
 </script>
