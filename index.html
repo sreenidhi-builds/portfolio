@@ -285,7 +285,7 @@ html[data-theme="dark"] .mobile-menu-link:hover{color:var(--gold-soft);}
 html[data-theme="dark"] .mobile-menu-link svg{flex-shrink:0; color:var(--gold-dim);}
 @media (min-width:621px){html[data-theme="dark"] .mobile-menu{display:none !important;}}
 html[data-theme="dark"] .hero{position:relative; min-height:92vh; display:flex; flex-direction:column; justify-content:flex-start; align-items:flex-start; text-align:left; padding:120px 32px 40px;}
-html[data-theme="dark"] .hero-inner{z-index:2; max-width:var(--container); margin:0 auto; width:100%; position:relative; display:flex; flex-direction:column; align-items:flex-start;}
+html[data-theme="dark"] .hero-inner{z-index:2; max-width:calc(var(--container) - 64px); margin:0 auto; width:100%; position:relative; display:flex; flex-direction:column; align-items:flex-start;}
 html[data-theme="dark"] .hero-desk{position:absolute; right:4%; bottom:18px; width:min(483px, 38vw); pointer-events:none;}
 html[data-theme="dark"] .hero-desk .hero-desk-frame{position:relative; display:block; border:none; border-radius:8px; padding:0;
   
@@ -372,7 +372,7 @@ html[data-theme="dark"] .hero-title mark{background:transparent;
   display:inline;
   white-space:nowrap;
   animation:markColor_d 9s ease 3s infinite;}
-html[data-theme="dark"] .hero-note{position:absolute; left:4%; bottom:76px; max-width:300px;}
+html[data-theme="dark"] .hero-note{position:absolute; left:calc(32px + max(0px, (100% - var(--container)) / 2)); bottom:76px; max-width:300px;}
 html[data-theme="dark"] .hero-note-tags{display:flex; gap:8px; margin-bottom:10px;}
 html[data-theme="dark"] .hero-note-tag{font-family:var(--font-body); font-weight:700; font-size:11px; letter-spacing:.06em;
   text-transform:uppercase; color:var(--gold); background:var(--card); border:1px solid var(--card-border);
@@ -380,7 +380,7 @@ html[data-theme="dark"] .hero-note-tag{font-family:var(--font-body); font-weight
 html[data-theme="dark"] .hero-note p{font-family:var(--font-body); font-size:13.5px; line-height:1.55; color:var(--text-muted); margin:0;}
 @media (max-width:900px){html[data-theme="dark"] .hero-note{position:relative; left:auto; bottom:auto; max-width:420px; margin-top:28px;}}
 @media (max-width:620px){html[data-theme="dark"] .hero-note{max-width:100%;}}
-html[data-theme="dark"] .scroll-cue{position:absolute; left:4%; bottom:18px; margin-top:0; display:flex; align-items:center; justify-content:center; color:#e5e5e5; opacity:0; animation:cueFadeIn .8s ease forwards; animation-delay:3s;}
+html[data-theme="dark"] .scroll-cue{position:absolute; left:calc(32px + max(0px, (100% - var(--container)) / 2)); bottom:18px; margin-top:0; display:flex; align-items:center; justify-content:center; color:#e5e5e5; opacity:0; animation:cueFadeIn .8s ease forwards; animation-delay:3s;}
 @media (max-width:900px){html[data-theme="dark"] .scroll-cue{position:relative; left:auto; bottom:auto; margin-top:36px; align-self:flex-start;}}
 @media (max-width:620px){html[data-theme="dark"] .scroll-cue{display:none;}}
 
@@ -786,7 +786,7 @@ html[data-theme="light"] .mobile-menu-link:hover{color:var(--gold);}
 html[data-theme="light"] .mobile-menu-link svg{flex-shrink:0; color:var(--gold);}
 @media (min-width:621px){html[data-theme="light"] .mobile-menu{display:none !important;}}
 html[data-theme="light"] .hero{position:relative; min-height:92vh; display:flex; flex-direction:column; justify-content:flex-start; align-items:flex-start; text-align:left; padding:120px 32px 40px;}
-html[data-theme="light"] .hero-inner{z-index:2; max-width:var(--container); margin:0 auto; width:100%; position:relative; display:flex; flex-direction:column; align-items:flex-start;}
+html[data-theme="light"] .hero-inner{z-index:2; max-width:calc(var(--container) - 64px); margin:0 auto; width:100%; position:relative; display:flex; flex-direction:column; align-items:flex-start;}
 html[data-theme="light"] .hero-desk{position:absolute; right:4%; bottom:18px; width:min(483px, 38vw); pointer-events:none;}
 html[data-theme="light"] .hero-desk .hero-desk-frame{position:relative; display:block; border:none; border-radius:16px; padding:12px;
   background:#fff;
@@ -874,14 +874,14 @@ html[data-theme="light"] .hero-title mark{background:transparent;
   display:inline;
   white-space:nowrap;
   animation:markColor_l 9s ease 3s infinite;}
-html[data-theme="light"] .hero-note{position:absolute; left:4%; bottom:76px; max-width:300px;}
+html[data-theme="light"] .hero-note{position:absolute; left:calc(32px + max(0px, (100% - var(--container)) / 2)); bottom:76px; max-width:300px;}
 html[data-theme="light"] .hero-note-tags{display:flex; gap:8px; margin-bottom:10px;}
 html[data-theme="light"] .hero-note-tag{font-family:var(--font-body); font-weight:700; font-size:11px; letter-spacing:.06em;
   text-transform:uppercase; color:var(--blue); background:var(--blue-pale); padding:3px 9px; border-radius:999px;}
 html[data-theme="light"] .hero-note p{font-family:var(--font-body); font-size:13.5px; line-height:1.55; color:#6b6e78; margin:0;}
 @media (max-width:900px){html[data-theme="light"] .hero-note{position:relative; left:auto; bottom:auto; max-width:420px; margin-top:28px;}}
 @media (max-width:620px){html[data-theme="light"] .hero-note{max-width:100%;}}
-html[data-theme="light"] .scroll-cue{position:absolute; left:4%; bottom:18px; margin-top:0; display:flex; align-items:center; justify-content:center; color:#5a5d68; opacity:0; animation:cueFadeIn .8s ease forwards; animation-delay:3s;}
+html[data-theme="light"] .scroll-cue{position:absolute; left:calc(32px + max(0px, (100% - var(--container)) / 2)); bottom:18px; margin-top:0; display:flex; align-items:center; justify-content:center; color:#5a5d68; opacity:0; animation:cueFadeIn .8s ease forwards; animation-delay:3s;}
 @media (max-width:900px){html[data-theme="light"] .scroll-cue{position:relative; left:auto; bottom:auto; margin-top:36px; align-self:flex-start;}}
 @media (max-width:620px){html[data-theme="light"] .scroll-cue{display:none;}}
 
