@@ -88,7 +88,7 @@
     --gutter:          clamp(24px, 5vw, 64px);
 
     /* ---- LAYOUT ---- */
-    --page-max:  1180px;         /* max page width              */
+    --page-max:  calc(1280px + 2 * var(--gutter));         /* max page width              */
     --measure:   680px;          /* max paragraph width         */
     --grid-cols: 12;
 
@@ -1912,7 +1912,7 @@ html[data-theme="light"] header.nav{--black:        #F7F3EC;
 
   --container:    1280px;}
 html[data-theme="light"] .nav{position:sticky; top:0; z-index:50; background:transparent; border-bottom:none;}
-html[data-theme="light"] .nav-inner{max-width:var(--container); margin:0 auto; padding:11px 32px; display:flex; align-items:center; justify-content:space-between; gap:24px;}
+html[data-theme="light"] .nav-inner{max-width:calc(var(--container) + 64px); margin:0 auto; padding:11px 32px; display:flex; align-items:center; justify-content:space-between; gap:24px;}
 html[data-theme="light"] .logo-wrap{position:relative; display:flex; align-items:center;}
 html[data-theme="light"] .logo{display:flex; align-items:center; gap:4px;}
 html[data-theme="light"] .logo-text{font-family:var(--font-body); font-weight:400; font-size:12px;

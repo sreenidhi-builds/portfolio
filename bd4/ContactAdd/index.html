@@ -51,7 +51,7 @@
     --radius-card:16px; --radius-screenshot:16px; --radius-pill:999px;
     --space-1:8px; --space-2:16px; --space-3:24px; --space-4:40px; --space-5:64px; --space-6:96px; --space-7:120px;
     --section-y:clamp(64px,9vw,120px); --section-y-tight:clamp(40px,6vw,64px); --gutter:clamp(24px,5vw,64px);
-    --maxw:1180px; --measure:680px;
+    --maxw:1280px; --measure:680px;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -625,7 +625,7 @@ html[data-theme="light"] header.nav{--black:        #F7F3EC;
 
   --container:    1280px;}
 html[data-theme="light"] .nav{position:sticky; top:0; z-index:50; background:transparent; border-bottom:none;}
-html[data-theme="light"] .nav-inner{max-width:var(--container); margin:0 auto; padding:11px 32px; display:flex; align-items:center; justify-content:space-between; gap:24px;}
+html[data-theme="light"] .nav-inner{max-width:calc(var(--container) + 64px); margin:0 auto; padding:11px 32px; display:flex; align-items:center; justify-content:space-between; gap:24px;}
 html[data-theme="light"] .logo-wrap{position:relative; display:flex; align-items:center;}
 html[data-theme="light"] .logo{display:flex; align-items:center; gap:4px;}
 html[data-theme="light"] .logo-text{font-family:var(--font-body); font-weight:400; font-size:12px;
