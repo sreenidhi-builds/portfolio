@@ -372,12 +372,12 @@ html[data-theme="dark"] .hero-title mark{background:transparent;
   display:inline;
   white-space:nowrap;
   animation:markColor_d 9s ease 3s infinite;}
-html[data-theme="dark"] .hero-note{position:absolute; left:calc(32px + max(0px, (100% - var(--container) - 64px) / 2)); bottom:76px; max-width:300px;}
+html[data-theme="dark"] .hero-note{position:absolute; left:calc(32px + max(0px, (100% - var(--container) - 64px) / 2)); bottom:76px; max-width:340px;}
 html[data-theme="dark"] .hero-note-tags{display:flex; gap:8px; margin-bottom:10px;}
 html[data-theme="dark"] .hero-note-tag{font-family:var(--font-body); font-weight:700; font-size:11px; letter-spacing:.06em;
   text-transform:uppercase; color:var(--gold); background:var(--card); border:1px solid var(--card-border);
   padding:3px 9px; border-radius:999px;}
-html[data-theme="dark"] .hero-note p{font-family:var(--font-body); font-size:13.5px; line-height:1.55; color:var(--text-muted); margin:0;}
+html[data-theme="dark"] .hero-note p{font-family:var(--font-body); font-size:15px; line-height:1.55; color:var(--text-muted); margin:0;}
 @media (max-width:900px){html[data-theme="dark"] .hero-note{position:relative; left:auto; bottom:auto; max-width:420px; margin-top:28px;}}
 @media (max-width:620px){html[data-theme="dark"] .hero-note{max-width:100%;}}
 html[data-theme="dark"] .scroll-cue{position:absolute; left:calc(32px + max(0px, (100% - var(--container) - 64px) / 2)); bottom:18px; margin-top:0; display:flex; align-items:center; justify-content:center; color:#e5e5e5; opacity:0; animation:cueFadeIn .8s ease forwards; animation-delay:3s;}
@@ -874,11 +874,11 @@ html[data-theme="light"] .hero-title mark{background:transparent;
   display:inline;
   white-space:nowrap;
   animation:markColor_l 9s ease 3s infinite;}
-html[data-theme="light"] .hero-note{position:absolute; left:calc(32px + max(0px, (100% - var(--container) - 64px) / 2)); bottom:76px; max-width:300px;}
+html[data-theme="light"] .hero-note{position:absolute; left:calc(32px + max(0px, (100% - var(--container) - 64px) / 2)); bottom:76px; max-width:340px;}
 html[data-theme="light"] .hero-note-tags{display:flex; gap:8px; margin-bottom:10px;}
 html[data-theme="light"] .hero-note-tag{font-family:var(--font-body); font-weight:700; font-size:11px; letter-spacing:.06em;
   text-transform:uppercase; color:var(--blue); background:var(--blue-pale); padding:3px 9px; border-radius:999px;}
-html[data-theme="light"] .hero-note p{font-family:var(--font-body); font-size:13.5px; line-height:1.55; color:#6b6e78; margin:0;}
+html[data-theme="light"] .hero-note p{font-family:var(--font-body); font-size:15px; line-height:1.55; color:#6b6e78; margin:0;}
 @media (max-width:900px){html[data-theme="light"] .hero-note{position:relative; left:auto; bottom:auto; max-width:420px; margin-top:28px;}}
 @media (max-width:620px){html[data-theme="light"] .hero-note{max-width:100%;}}
 html[data-theme="light"] .scroll-cue{position:absolute; left:calc(32px + max(0px, (100% - var(--container) - 64px) / 2)); bottom:18px; margin-top:0; display:flex; align-items:center; justify-content:center; color:#5a5d68; opacity:0; animation:cueFadeIn .8s ease forwards; animation-delay:3s;}
@@ -1137,6 +1137,24 @@ html[data-theme="dark"] .theme-pill .tp-sun{ color:var(--text-hi); opacity:.6; }
 @media (prefers-reduced-motion: reduce){ .tp-thumb{ transition:none; } }
 @media (prefers-reduced-motion: reduce){ .fab{ transition:none; } }
 
+
+html[data-theme="dark"] .lets-actions{display:flex; flex-direction:column; align-items:flex-start; gap:18px;}
+html[data-theme="dark"] .lets-mail{display:flex; align-items:center; gap:10px; font-family:var(--font-body); font-size:1rem;}
+html[data-theme="dark"] .lets-mail-link{color:#c9c9cd; text-decoration:underline; text-underline-offset:4px; text-decoration-color:rgba(255,255,255,.3); transition:color .2s ease;}
+html[data-theme="dark"] .lets-mail-link:hover{color:var(--gold-soft);}
+html[data-theme="dark"] .lets-mail-copy{position:relative; display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; border-radius:999px; border:1px solid #2a2a2a; background:transparent; color:#c9c9cd; cursor:pointer; transition:color .2s ease, border-color .2s ease, background .2s ease;}
+html[data-theme="dark"] .lets-mail-copy:hover{color:var(--gold-soft); border-color:var(--gold-soft);}
+html[data-theme="dark"] .lets-mail-tip{position:absolute; bottom:calc(100% + 8px); left:50%; transform:translateX(-50%) translateY(4px); padding:3px 9px; border-radius:6px; font-size:.75rem; white-space:nowrap; background:#f0eee8; color:#111; opacity:0; pointer-events:none; transition:opacity .2s ease, transform .2s ease;}
+html[data-theme="dark"] .lets-mail-copy.copied .lets-mail-tip{opacity:1; transform:translateX(-50%) translateY(0);}
+
+html[data-theme="light"] .lets-actions{display:flex; flex-direction:column; align-items:flex-start; gap:18px;}
+html[data-theme="light"] .lets-mail{display:flex; align-items:center; gap:10px; font-family:var(--font-body); font-size:1rem;}
+html[data-theme="light"] .lets-mail-link{color:#4b4e58; text-decoration:underline; text-underline-offset:4px; text-decoration-color:rgba(75,78,88,.35); transition:color .2s ease;}
+html[data-theme="light"] .lets-mail-link:hover{color:var(--gold);}
+html[data-theme="light"] .lets-mail-copy{position:relative; display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; border-radius:0; border:1px solid var(--card-border); background:transparent; color:#4b4e58; cursor:pointer; transition:color .2s ease, border-color .2s ease, background .2s ease;}
+html[data-theme="light"] .lets-mail-copy:hover{color:var(--gold); border-color:var(--gold);}
+html[data-theme="light"] .lets-mail-tip{position:absolute; bottom:calc(100% + 8px); left:50%; transform:translateX(-50%) translateY(4px); padding:3px 9px; border-radius:6px; font-size:.75rem; white-space:nowrap; background:#1B1D24; color:#fff; opacity:0; pointer-events:none; transition:opacity .2s ease, transform .2s ease;}
+html[data-theme="light"] .lets-mail-copy.copied .lets-mail-tip{opacity:1; transform:translateX(-50%) translateY(0);}
 </style>
 </head>
 <body id="top">
@@ -1269,7 +1287,7 @@ html[data-theme="dark"] .theme-pill .tp-sun{ color:var(--text-hi); opacity:.6; }
   <!-- ================= HERO ================= -->
   <section class="hero">
     <div class="hero-inner">
-      <h1 class="hero-title">A Curious <span class="mark-wrap" id="markWrap"><span class="drag-cursor"><svg viewBox="0 0 16 16" fill="none"><path d="M1.2 1.2 L1.2 13 L4.6 10.1 L7 14.8 L9.1 13.8 L6.7 9.1 L11 9.1 Z" fill="#1B1D24" stroke="#FFFFFF" stroke-width="0.7" stroke-linejoin="round"/></svg></span><span class="mark-label">Text <span class="ml-code">&lt;/&gt;</span></span><div class="figma-box" id="figmaBox"><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span></div><mark>People × Product</mark><span class="pill-slide" id="pillWrap"><span class="badge-float badge-inline"><span class="badge-avatar">SJ</span><span>Sreenidhi</span></span></span></span><br>Designer + Strategist + Researcher</h1>
+      <h1 class="hero-title">A Curious <span class="mark-wrap" id="markWrap"><span class="drag-cursor"><svg viewBox="0 0 16 16" fill="none"><path d="M1.2 1.2 L1.2 13 L4.6 10.1 L7 14.8 L9.1 13.8 L6.7 9.1 L11 9.1 Z" fill="#1B1D24" stroke="#FFFFFF" stroke-width="0.7" stroke-linejoin="round"/></svg></span><span class="mark-label">Text <span class="ml-code">&lt;/&gt;</span></span><div class="figma-box" id="figmaBox"><span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span></div><mark>People × Product × Agent</mark><span class="pill-slide" id="pillWrap"><span class="badge-float badge-inline"><span class="badge-avatar">SJ</span><span>Sreenidhi</span></span></span></span><br>Designer + Strategist + Researcher</h1>
     </div>
     <div class="hero-note">
       <div class="hero-note-tags"><span class="hero-note-tag">B2B</span><span class="hero-note-tag">B2C</span></div>
@@ -1472,7 +1490,8 @@ html[data-theme="dark"] .theme-pill .tp-sun{ color:var(--text-hi); opacity:.6; }
         <h2 class="lets-title">actionable outcomes <span class="gold">together</span></h2>
         <p class="lets-sub">This is Sreenidhi,<br>continually looking for innovative ways to use technology, research, and design</p>
       </div>
-      <a class="resume-btn" href="Sreenidhi_Resume_Product_Strategist_Designer.pdf" target="_blank" rel="noopener" aria-label="Resume">
+      <div class="lets-actions">
+        <a class="resume-btn" href="Sreenidhi_Resume_Product_Strategist_Designer.pdf" target="_blank" rel="noopener" aria-label="Resume">
         <span class="btn-corner tl"></span>
         <span class="btn-corner tr"></span>
         <span class="btn-corner bl"></span>
@@ -1486,6 +1505,11 @@ html[data-theme="dark"] .theme-pill .tp-sun{ color:var(--text-hi); opacity:.6; }
         </span>
         <span class="resume-label">Resume</span>
       </a>
+        <div class="lets-mail">
+          <a class="lets-mail-link" href="mailto:sreenidhi.des@gmail.com">sreenidhi.des@gmail.com</a>
+          <button class="lets-mail-copy" type="button" id="copyMail" aria-label="Copy email address"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg><span class="lets-mail-tip">Copied</span></button>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1499,6 +1523,15 @@ html[data-theme="dark"] .theme-pill .tp-sun{ color:var(--text-hi); opacity:.6; }
 </footer>
 
 <script>
+(function(){
+  var b=document.getElementById('copyMail'); if(!b) return;
+  b.addEventListener('click',function(){
+    var t='sreenidhi.des@gmail.com';
+    function done(){ b.classList.add('copied'); setTimeout(function(){ b.classList.remove('copied'); },1600); }
+    if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(t).then(done,fallback); } else fallback();
+    function fallback(){ var a=document.createElement('textarea'); a.value=t; a.style.position='fixed'; a.style.opacity='0'; document.body.appendChild(a); a.select(); try{document.execCommand('copy');}catch(e){} document.body.removeChild(a); done(); }
+  });
+})();
 document.getElementById('year').textContent = new Date().getFullYear();
 
 // ---- Twinkling starfield (whole page) ----
