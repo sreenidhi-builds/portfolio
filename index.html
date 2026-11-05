@@ -16,7 +16,7 @@
 </script>
 <script>
 /* first landing of the session (not an in-site transition): show the verify loader until the page has loaded */
-(function(){try{var d=document.documentElement;if(sessionStorage.getItem('pt-pending')||sessionStorage.getItem('home-loader-seen'))return;sessionStorage.setItem('home-loader-seen','1');d.className+=' hl-on';d.removeAttribute('data-entry-transition');}catch(e){}})();
+(function(){try{var d=document.documentElement;if(sessionStorage.getItem('pt-pending')||sessionStorage.getItem('home-loader-seen'))return;sessionStorage.setItem('home-loader-seen','1');d.className+=' hl-on hl-rise';d.removeAttribute('data-entry-transition');}catch(e){}})();
 </script>
 <script>
 (function(){try{var t=localStorage.getItem('site-theme');document.documentElement.dataset.theme=(t==='dark')?'dark':'light';}catch(e){document.documentElement.dataset.theme='light';}})();
@@ -573,7 +573,7 @@ html[data-theme="dark"] .proj-desc{opacity:1; max-height:none; transform:none; m
 html[data-theme="dark"] .proj-actions{opacity:1; max-height:none; transform:none; margin-top:4px;}
 html[data-theme="dark"] .project .video-frame, html[data-theme="dark"] .project .screen-slot{transform:scale(1);}}
 @media (max-width: 620px){html[data-theme="dark"] .nav-links{display:none;}
-html[data-theme="dark"] .nav-resume, html[data-theme="dark"] .linkedin-pill{display:none;}
+html[data-theme="dark"] .nav-resume, html[data-theme="dark"] .linkedin-pill, html[data-theme="dark"] .nav-about-btn{display:none;}
 html[data-theme="dark"] .nav-hamburger{display:flex;}
 html[data-theme="dark"] .hero{padding:40px 20px 30px; min-height:auto;}
 html[data-theme="dark"] .hero-title{font-size:clamp(1.8rem, 8.5vw, 2.6rem); word-break:break-word;}
@@ -1074,7 +1074,7 @@ html[data-theme="light"] .proj-desc{opacity:1; max-height:none; transform:none; 
 html[data-theme="light"] .proj-actions{opacity:1; max-height:none; transform:none; margin-top:4px;}
 html[data-theme="light"] .project .video-frame, html[data-theme="light"] .project .screen-slot{transform:scale(1);}}
 @media (max-width: 620px){html[data-theme="light"] .nav-links{display:none;}
-html[data-theme="light"] .nav-resume, html[data-theme="light"] .linkedin-pill{display:none;}
+html[data-theme="light"] .nav-resume, html[data-theme="light"] .linkedin-pill, html[data-theme="light"] .nav-about-btn{display:none;}
 html[data-theme="light"] .nav-hamburger{display:flex;}
 html[data-theme="light"] .hero{padding:40px 20px 30px; min-height:auto;}
 html[data-theme="light"] .hero-title{font-size:clamp(1.8rem, 8.5vw, 2.6rem); word-break:break-word;}
@@ -1166,8 +1166,12 @@ html.hl-on{overflow:hidden}
 html.hl-on #hl{display:flex}
 #hl{--hl-bg:#F7F3EC;--hl-text:#1B1D24;--hl-muted:#6B6E78;--hl-green:#2E9B5F;--hl-accent:#B8750A;--hl-glow:rgba(62,99,194,.08);--hl-scan:rgba(240,169,30,.95);--hl-scan-glow:rgba(240,169,30,.5);--hl-track:#E4DFD3;--hl-fill:#3E63C2;--hl-orbit:#F0A91E;--hl-face:#3E63C2;--hl-eye:#fff;--hl-check:#fff;--hl-badge-glow:rgba(46,155,95,.4);--hl-face-shadow:drop-shadow(0 10px 24px rgba(27,29,36,.08))}
 html[data-theme="dark"] #hl{--hl-bg:#0a0a0a;--hl-text:#f5f5f5;--hl-muted:#8a8a8f;--hl-green:#5cc98a;--hl-accent:#F8C337;--hl-glow:rgba(248,195,55,.09);--hl-scan:rgba(248,195,55,.9);--hl-scan-glow:rgba(248,195,55,.6);--hl-track:rgba(255,255,255,.08);--hl-fill:#F8C337;--hl-orbit:#b8934a;--hl-face:#F8C337;--hl-eye:#0a0a0a;--hl-check:#06220f;--hl-badge-glow:rgba(92,201,138,.6);--hl-face-shadow:none}
-#hl{position:fixed;inset:0;z-index:2147483000;background:var(--hl-bg);color:var(--hl-text);flex-direction:column;align-items:center;justify-content:center;gap:30px;font-family:'Manrope',system-ui,sans-serif;transition:transform .85s cubic-bezier(.6,0,.25,1)}
-#hl.is-done{transform:translateY(-100%)}
+#hl{position:fixed;inset:0;z-index:2147483000;background:var(--hl-bg);color:var(--hl-text);flex-direction:column;align-items:center;justify-content:center;gap:30px;font-family:'Manrope',system-ui,sans-serif;transition:opacity .4s ease}
+#hl.is-done{opacity:0}
+html.hl-rise{background:#F7F3EC}
+html.hl-rise[data-theme="dark"]{background:#0a0a0a}
+html.hl-rise body{transform:translateY(100%)}
+html.hl-rise.hl-go body{transition:transform .8s cubic-bezier(.2,.8,.2,1);transform:translateY(0)}
 #hl .hl-glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 50% 40% at 50% 40%,var(--hl-glow),transparent 62%)}
 #hl .hl-face{position:relative;width:168px;height:148px;filter:var(--hl-face-shadow)}
 #hl .hl-face svg{width:100%;height:100%;display:block;overflow:visible}
@@ -1222,6 +1226,7 @@ html[data-theme="dark"] #hl{--hl-bg:#0a0a0a;--hl-text:#f5f5f5;--hl-muted:#8a8a8f
 (function(){
   var d=document.documentElement, pre=document.getElementById('hl');
   if(!pre) return;
+  d.appendChild(pre); /* keep the loader outside <body> so the body's slide-up transform doesn't move it */
   if(!d.classList.contains('hl-on')){ pre.parentNode.removeChild(pre); return; }
   var headline=document.getElementById('hlHeadline'), eyebrow=document.getElementById('hlEyebrow');
   var phrases=["Checking if you're human...","Or just really productive.","Scanning for a pulse...","Counting your fingers (all 10, good).","Making sure you're not three raccoons."];
@@ -1237,9 +1242,13 @@ html[data-theme="dark"] #hl{--hl-bg:#0a0a0a;--hl-text:#f5f5f5;--hl-muted:#8a8a8f
     setTimeout(function(){ headline.textContent="Yes, you're human. Welcome in."; headline.style.opacity=1; },200);
     pre.classList.add('is-verified');
     setTimeout(function(){
-      pre.classList.add('is-done');
-      d.classList.remove('hl-on'); /* unlock scroll; the loader is still sliding away on top */
-      setTimeout(function(){ if(pre.parentNode) pre.parentNode.removeChild(pre); },1000);
+      pre.classList.add('is-done'); /* loader fades while the home page slides up from the bottom */
+      void d.offsetWidth;
+      d.classList.add('hl-go');
+      setTimeout(function(){
+        d.classList.remove('hl-on','hl-rise','hl-go'); /* unlock scroll, drop the body transform */
+        if(pre.parentNode) pre.parentNode.removeChild(pre);
+      },900);
     },950);
   }
   function ready(){
