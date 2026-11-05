@@ -15,8 +15,12 @@
 })();
 </script>
 <script>
+/* first landing of the session (not an in-site transition): show the verify loader until the page has loaded */
+(function(){try{var d=document.documentElement;if(sessionStorage.getItem('pt-pending')||sessionStorage.getItem('home-loader-seen'))return;sessionStorage.setItem('home-loader-seen','1');d.className+=' hl-on';d.removeAttribute('data-entry-transition');}catch(e){}})();
+</script>
+<script>
 (function(){try{var t=localStorage.getItem('site-theme');document.documentElement.dataset.theme=(t==='dark')?'dark':'light';}catch(e){document.documentElement.dataset.theme='light';}})();
-(function(){try{document.documentElement.className+=' pt-incoming';var s=document.createElement('style');s.textContent='html.pt-incoming{background:'+(document.documentElement.dataset.theme==='light'?'#F7F3EC':'#050505')+';}html.pt-incoming body{transform:translateY(100%);}';document.head.appendChild(s);sessionStorage.removeItem('pt-pending');}catch(e){}})();
+(function(){try{if(document.documentElement.classList.contains('hl-on')){sessionStorage.removeItem('pt-pending');return;}document.documentElement.className+=' pt-incoming';var s=document.createElement('style');s.textContent='html.pt-incoming{background:'+(document.documentElement.dataset.theme==='light'?'#F7F3EC':'#050505')+';}html.pt-incoming body{transform:translateY(100%);}';document.head.appendChild(s);sessionStorage.removeItem('pt-pending');}catch(e){}})();
 </script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -1156,8 +1160,101 @@ html[data-theme="light"] .lets-mail-copy:hover{color:var(--gold); border-color:v
 html[data-theme="light"] .lets-mail-tip{position:absolute; bottom:calc(100% + 8px); left:50%; transform:translateX(-50%) translateY(4px); padding:3px 9px; border-radius:6px; font-size:.75rem; white-space:nowrap; background:#1B1D24; color:#fff; opacity:0; pointer-events:none; transition:opacity .2s ease, transform .2s ease;}
 html[data-theme="light"] .lets-mail-copy.copied .lets-mail-tip{opacity:1; transform:translateX(-50%) translateY(0);}
 </style>
+<style id="hl-css">
+#hl{display:none}
+html.hl-on{overflow:hidden}
+html.hl-on #hl{display:flex}
+#hl{--hl-bg:#F7F3EC;--hl-text:#1B1D24;--hl-muted:#6B6E78;--hl-green:#2E9B5F;--hl-accent:#B8750A;--hl-glow:rgba(62,99,194,.08);--hl-scan:rgba(240,169,30,.95);--hl-scan-glow:rgba(240,169,30,.5);--hl-track:#E4DFD3;--hl-fill:#3E63C2;--hl-orbit:#F0A91E;--hl-face:#3E63C2;--hl-eye:#fff;--hl-check:#fff;--hl-badge-glow:rgba(46,155,95,.4);--hl-face-shadow:drop-shadow(0 10px 24px rgba(27,29,36,.08))}
+html[data-theme="dark"] #hl{--hl-bg:#0a0a0a;--hl-text:#f5f5f5;--hl-muted:#8a8a8f;--hl-green:#5cc98a;--hl-accent:#F8C337;--hl-glow:rgba(248,195,55,.09);--hl-scan:rgba(248,195,55,.9);--hl-scan-glow:rgba(248,195,55,.6);--hl-track:rgba(255,255,255,.08);--hl-fill:#F8C337;--hl-orbit:#b8934a;--hl-face:#F8C337;--hl-eye:#0a0a0a;--hl-check:#06220f;--hl-badge-glow:rgba(92,201,138,.6);--hl-face-shadow:none}
+#hl{position:fixed;inset:0;z-index:2147483000;background:var(--hl-bg);color:var(--hl-text);flex-direction:column;align-items:center;justify-content:center;gap:30px;font-family:'Manrope',system-ui,sans-serif;transition:transform .85s cubic-bezier(.6,0,.25,1)}
+#hl.is-done{transform:translateY(-100%)}
+#hl .hl-glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 50% 40% at 50% 40%,var(--hl-glow),transparent 62%)}
+#hl .hl-face{position:relative;width:168px;height:148px;filter:var(--hl-face-shadow)}
+#hl .hl-face svg{width:100%;height:100%;display:block;overflow:visible}
+#hl .hl-scan{position:absolute;left:-12%;right:-12%;height:2px;background:linear-gradient(90deg,transparent,var(--hl-scan),transparent);top:8%;opacity:0;filter:drop-shadow(0 0 6px var(--hl-scan-glow));animation:hlScan 1.9s ease-in-out infinite}
+@keyframes hlScan{0%{top:6%;opacity:0}10%{opacity:1}50%{top:86%;opacity:1}90%{opacity:1}100%{top:6%;opacity:0}}
+#hl .hl-eye{transform-box:fill-box;transform-origin:center;animation:hlBlink 4.3s ease-in-out infinite}
+#hl .hl-pupil{animation:hlLook 3.7s ease-in-out infinite}
+@keyframes hlBlink{0%,88%,100%{transform:scaleY(1)}92%{transform:scaleY(.12)}96%{transform:scaleY(1)}}
+@keyframes hlLook{0%,100%{transform:translate(0,0)}15%{transform:translate(-3px,0)}30%{transform:translate(-3px,-2px)}45%{transform:translate(2.5px,-2px)}60%{transform:translate(3px,1.5px)}80%{transform:translate(0,2px)}}
+#hl.is-verified .hl-scan{animation:none;opacity:0}
+#hl.is-verified .hl-eye,#hl.is-verified .hl-pupil{animation:none;transform:none}
+#hl .hl-badge{position:absolute;right:-4px;bottom:4px;width:42px;height:42px;border-radius:50%;background:var(--hl-green);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 4px var(--hl-bg),0 6px 18px -4px var(--hl-badge-glow);transform:scale(0);opacity:0;transition:transform .5s cubic-bezier(.34,1.56,.64,1),opacity .25s ease}
+#hl.is-verified .hl-badge{transform:scale(1);opacity:1}
+#hl .hl-badge svg{width:21px;height:21px}
+#hl .hl-copy{text-align:center;max-width:320px;padding:0 24px}
+#hl .hl-eyebrow{font-weight:700;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--hl-accent);display:inline-flex;align-items:center;gap:6px}
+#hl .hl-eyebrow.is-verified-label{color:var(--hl-green)}
+#hl .hl-dot{width:5px;height:5px;border-radius:50%;background:var(--hl-accent);animation:hlDot 1.2s ease-in-out infinite}
+#hl .hl-dot:nth-child(2){animation-delay:.2s}
+#hl .hl-dot:nth-child(3){animation-delay:.4s}
+@keyframes hlDot{0%,100%{opacity:.25;transform:scale(.8)}50%{opacity:1;transform:scale(1)}}
+#hl.is-verified .hl-dot{display:none}
+#hl .hl-headline{margin-top:10px;font-weight:600;font-size:15.5px;line-height:1.5;color:var(--hl-text);min-height:24px;transition:opacity .2s ease}
+#hl .hl-bar{width:184px;height:3px;border-radius:999px;background:var(--hl-track);overflow:hidden;transition:opacity .3s ease}
+#hl .hl-bar-fill{height:100%;width:30%;border-radius:999px;background:var(--hl-fill);animation:hlBar 1.6s ease-in-out infinite}
+#hl.is-verified .hl-bar{opacity:0}
+@keyframes hlBar{0%{transform:translateX(-120%)}100%{transform:translateX(340%)}}
+</style>
 </head>
 <body id="top">
+<div id="hl" role="status" aria-live="polite">
+  <div class="hl-glow"></div>
+  <div class="hl-face">
+    <div class="hl-scan"></div>
+    <svg viewBox="0 0 52 46" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <ellipse cx="24" cy="22" rx="23" ry="9" style="stroke:var(--hl-orbit)" stroke-width="1.4" fill="none"/>
+      <circle cx="22" cy="24" r="12" style="fill:var(--hl-face)"/>
+      <g class="hl-eye"><circle cx="18" cy="24" r="4.4" fill="none" style="stroke:var(--hl-eye)" stroke-width="1.3"/><circle class="hl-pupil" cx="18" cy="24" r="1.7" style="fill:var(--hl-eye)"/></g>
+      <g class="hl-eye"><circle cx="27" cy="24" r="4.4" fill="none" style="stroke:var(--hl-eye)" stroke-width="1.3"/><circle class="hl-pupil" cx="27" cy="24" r="1.7" style="fill:var(--hl-eye)"/></g>
+      <line x1="22.4" y1="24" x2="22.6" y2="24" style="stroke:var(--hl-eye)" stroke-width="1.3"/>
+    </svg>
+    <div class="hl-badge"><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" style="stroke:var(--hl-check)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  </div>
+  <div class="hl-copy">
+    <span class="hl-eyebrow" id="hlEyebrow">Verifying <span class="hl-dot"></span><span class="hl-dot"></span><span class="hl-dot"></span></span>
+    <div class="hl-headline" id="hlHeadline">Checking if you're human...</div>
+  </div>
+  <div class="hl-bar"><div class="hl-bar-fill"></div></div>
+</div>
+<script>
+/* verify loader: scans until the page (and fonts) have loaded, then shows Verified and slides away */
+(function(){
+  var d=document.documentElement, pre=document.getElementById('hl');
+  if(!pre) return;
+  if(!d.classList.contains('hl-on')){ pre.parentNode.removeChild(pre); return; }
+  var headline=document.getElementById('hlHeadline'), eyebrow=document.getElementById('hlEyebrow');
+  var phrases=["Checking if you're human...","Or just really productive.","Scanning for a pulse...","Counting your fingers (all 10, good).","Making sure you're not three raccoons."];
+  var idx=0, timer=setInterval(function(){
+    idx=(idx+1)%phrases.length; headline.style.opacity=0;
+    setTimeout(function(){ headline.textContent=phrases[idx]; headline.style.opacity=1; },200);
+  },1900);
+  var MIN_SHOW=1600, started=Date.now(), finished=false;
+  function finish(){
+    if(finished) return; finished=true; clearInterval(timer);
+    eyebrow.classList.add('is-verified-label'); eyebrow.textContent='Verified';
+    headline.style.opacity=0;
+    setTimeout(function(){ headline.textContent="Yes, you're human. Welcome in."; headline.style.opacity=1; },200);
+    pre.classList.add('is-verified');
+    setTimeout(function(){
+      pre.classList.add('is-done');
+      d.classList.remove('hl-on'); /* unlock scroll; the loader is still sliding away on top */
+      setTimeout(function(){ if(pre.parentNode) pre.parentNode.removeChild(pre); },1000);
+    },950);
+  }
+  function ready(){
+    var wait=Math.max(0,MIN_SHOW-(Date.now()-started));
+    setTimeout(finish,wait);
+  }
+  function onLoaded(){
+    var f=(document.fonts&&document.fonts.ready)?document.fonts.ready:Promise.resolve();
+    Promise.race([f,new Promise(function(r){setTimeout(r,3000);})]).then(ready,ready);
+  }
+  if(document.readyState==='complete') onLoaded(); else window.addEventListener('load',onLoaded);
+  setTimeout(finish,30000); /* failsafe: never trap the visitor on a stalled request */
+})();
+</script>
+
 
 <div class="fab-stack">
   <button class="fab fab-top" id="toTop" type="button" aria-label="Back to top">
